@@ -7,8 +7,8 @@
 const WEDDING_CONFIG = {
 
   // ---- Couple ----
-  groomName: "Diman Sitompul",
-  brideName: "Ruth Panjaitan",
+  groomName: "Theofil Tri Saputra Sibarani, S.Kom.",
+  brideName: "Nola Thasia Rehulina, S.IP.",
   groomFather: "Bapak XXX Sitompul",
   groomMother: "Ibu XXX boru Simatupang",
   brideFather: "Bapak XXX Panjaitan",
