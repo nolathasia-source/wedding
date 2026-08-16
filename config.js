@@ -9,10 +9,10 @@ const WEDDING_CONFIG = {
   // ---- Couple ----
   groomName: "Theofil Tri Saputra Sibarani, S.Kom.",
   brideName: "Nola Thasia Rehulina, S.IP.",
-  groomFather: "Bapak XXX Sitompul",
-  groomMother: "Ibu XXX boru Simatupang",
-  brideFather: "Bapak XXX Panjaitan",
-  brideMother: "Ibu XXX boru Hutagalung",
+  groomFather: "Bapak Musda Sibarani",
+  groomMother: "Ibu Leriani boru Simamora",
+  brideFather: "Bapak Frengky Nainggolan",
+  brideMother: "Ibu Embun boru Hutabarat",
 
   // ---- Date & Time ----
   // Use 24h format, ISO-like: "YYYY-MM-DDTHH:MM:SS" (this is the time the
