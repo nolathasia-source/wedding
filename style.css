@@ -1,0 +1,461 @@
+/* ==========================================================================
+   MODERN BATAK WEDDING — STYLE SYSTEM
+   Palette : ivory / champagne / cream / maroon / espresso / antique gold
+   Type    : Fraunces (display) · Manrope (body) · Caveat (handwritten accent)
+   Signature: "The Gorga Line" — hairline gold motif abstracted from
+              Batak gorga hook/diamond carving, used as divider + frame.
+   ========================================================================== */
+
+:root {
+  --ivory: #f7f1e4;
+  --champagne: #efe1c6;
+  --cream: #fbf8f1;
+  --maroon: #5a1420;
+  --maroon-deep: #3d0e17;
+  --espresso: #2b1d14;
+  --gold: #a9834e;
+  --gold-soft: #d8c39e;
+  --gold-line: rgba(169, 131, 78, 0.45);
+
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Manrope", -apple-system, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 2.75rem;
+  --space-5: 4.5rem;
+  --space-6: 7rem;
+
+  --container: 560px;
+  --edge: clamp(1.25rem, 6vw, 2.5rem);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--espresso);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
+
+/* ---------- film grain overlay ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- gate (envelope opener) ---------- */
+#gate {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: var(--ivory);
+  text-align: center;
+  padding: var(--space-3);
+  transition: opacity 0.9s var(--ease), visibility 0.9s var(--ease);
+}
+#gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.gate-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.gate-names {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.2rem, 10vw, 3.2rem);
+  color: var(--maroon);
+  line-height: 1.15;
+}
+.gate-to {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+.gate-guest {
+  font-size: 0.85rem;
+  color: var(--espresso);
+  opacity: 0.75;
+  max-width: 260px;
+}
+#gate-guest-name { font-weight: 700; color: var(--maroon); }
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.95rem 2.2rem;
+  border-radius: 2px;
+  border: 1px solid var(--maroon);
+  background: var(--maroon);
+  color: var(--cream);
+  transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); background: var(--maroon-deep); }
+.btn.ghost { background: transparent; color: var(--maroon); }
+.btn:disabled { opacity: 0.5; pointer-events: none; }
+
+/* ---------- gorga line motif ---------- */
+.gorga-divider { width: 100%; overflow: hidden; line-height: 0; }
+.gorga-divider svg { width: 100%; height: auto; display: block; }
+.gorga-corner {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  opacity: 0.8;
+}
+.gorga-corner.tl { top: var(--space-2); left: var(--space-2); }
+.gorga-corner.br { bottom: var(--space-2); right: var(--space-2); transform: rotate(180deg); }
+
+/* ---------- layout shells ---------- */
+main { position: relative; }
+.section { position: relative; padding: var(--space-6) var(--edge); }
+.section.alt { background: var(--champagne); }
+.section-inner { max-width: var(--container); margin: 0 auto; }
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+.eyebrow.center { text-align: center; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ---------- cover ---------- */
+#cover {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4) var(--edge) var(--space-3);
+  position: relative;
+  background: linear-gradient(180deg, var(--ivory) 0%, var(--champagne) 100%);
+  overflow: hidden;
+}
+#cover .cover-bg-photo {
+  position: absolute;
+  inset: 0;
+  background: url("assets/photos/cover.jpg") center/cover no-repeat;
+  opacity: 0.9;
+}
+#cover .cover-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(43,29,20,0.15) 0%, rgba(43,29,20,0.05) 35%, rgba(247,241,228,0.92) 92%);
+}
+.cover-top { position: relative; text-align: center; z-index: 2; }
+.cover-top .eyebrow { color: var(--cream); text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+.cover-mono {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin: auto 0;
+  padding: var(--space-4) 0;
+}
+.cover-mono-frame { position: relative; display: inline-block; padding: var(--space-3) var(--space-4); }
+.cover-mono-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cover-names {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 13vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--maroon-deep);
+  position: relative;
+  z-index: 1;
+}
+.cover-amp { display: block; font-size: 0.5em; color: var(--gold); margin: 0.1em 0; }
+.cover-bottom { position: relative; z-index: 2; text-align: center; }
+.cover-date {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--espresso);
+}
+.cover-scroll {
+  margin-top: var(--space-2);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cover-scroll::after {
+  content: "";
+  width: 1px;
+  height: 26px;
+  background: var(--gold);
+  animation: scrollpulse 1.8s ease-in-out infinite;
+}
+@keyframes scrollpulse { 0%,100% { transform: scaleY(1); opacity: 0.5; } 50% { transform: scaleY(0.5); opacity: 1; } }
+
+/* ---------- opening quote ---------- */
+#opening { text-align: center; }
+.opening-mark { font-family: var(--font-hand); font-size: 1.7rem; color: var(--gold); margin-bottom: var(--space-2); }
+.opening-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 5vw, 1.7rem);
+  line-height: 1.5;
+  color: var(--maroon-deep);
+}
+.opening-ref { margin-top: var(--space-2); font-size: 0.8rem; letter-spacing: 0.08em; opacity: 0.7; }
+
+/* ---------- bride & groom (asymmetric) ---------- */
+#couple .section-inner { display: flex; flex-direction: column; gap: var(--space-5); }
+.person-row { display: grid; grid-template-columns: 1fr; gap: var(--space-2); position: relative; }
+.person-row.reverse { justify-items: end; text-align: right; }
+.person-photo {
+  width: 78%;
+  aspect-ratio: 4/5;
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+  position: relative;
+}
+.person-row:not(.reverse) .person-photo { margin-right: auto; }
+.person-row.reverse .person-photo { margin-left: auto; }
+.person-photo.groom { background-image: url("assets/photos/groom.jpg"); }
+.person-photo.bride { background-image: url("assets/photos/bride.jpg"); }
+.person-tag {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--gold);
+  position: absolute;
+  bottom: -0.6rem;
+}
+.person-row:not(.reverse) .person-tag { left: 4%; }
+.person-row.reverse .person-tag { right: 4%; }
+.person-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  color: var(--maroon-deep);
+  margin-top: var(--space-2);
+}
+.person-parents { margin-top: 0.6rem; font-size: 0.85rem; opacity: 0.75; line-height: 1.7; }
+.couple-and {
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--gold);
+}
+
+/* ---------- countdown ---------- */
+#countdown { text-align: center; background: var(--maroon-deep); color: var(--cream); position: relative; overflow: hidden; }
+#countdown .eyebrow { color: var(--gold-soft); }
+#countdown .section-headline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  margin-bottom: var(--space-4);
+  color: var(--cream);
+}
+.countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); max-width: 420px; margin: 0 auto; }
+.countdown-cell { display: flex; flex-direction: column; gap: 0.35rem; }
+.countdown-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 8vw, 2.8rem);
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+}
+.countdown-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75; }
+.countdown-cta { margin-top: var(--space-4); }
+
+/* ---------- events / details ---------- */
+.event-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--gold-line);
+}
+.event-card:last-of-type { border-bottom: 1px solid var(--gold-line); }
+.event-num { font-family: var(--font-display); font-style: italic; font-size: 1.8rem; color: var(--gold); }
+.event-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--maroon-deep); margin-bottom: 0.3rem; }
+.event-meta { font-size: 0.88rem; line-height: 1.8; opacity: 0.85; }
+.event-actions { margin-top: var(--space-2); display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--maroon);
+  border-radius: 2px;
+  color: var(--maroon);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.pill:hover { background: var(--maroon); color: var(--cream); }
+
+/* ---------- map ---------- */
+.map-frame {
+  margin-top: var(--space-3);
+  aspect-ratio: 4/3;
+  background: var(--champagne) url("assets/photos/map-preview.jpg") center/cover no-repeat;
+  position: relative;
+  border: 1px solid var(--gold-line);
+}
+.map-frame::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(43,29,20,0.15) 100%);
+}
+.map-frame .pill { position: absolute; bottom: var(--space-2); left: 50%; transform: translateX(-50%); background: var(--cream); z-index: 2; white-space: nowrap; }
+
+/* ---------- gallery ---------- */
+#gallery .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-1); }
+#gallery .gallery-grid a:first-child { grid-column: 1 / -1; }
+.gallery-grid img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+#gallery .gallery-grid a:first-child img { aspect-ratio: 16/10; }
+
+/* ---------- RSVP ---------- */
+.form-field { margin-bottom: var(--space-2); text-align: left; }
+.form-field label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--maroon);
+  margin-bottom: 0.5rem;
+}
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gold-line);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.6rem 0.1rem;
+  color: var(--espresso);
+}
+.form-field textarea { resize: vertical; min-height: 90px; }
+.form-field input:focus, .form-field textarea:focus { border-bottom-color: var(--maroon); }
+.radio-group { display: flex; gap: 0.75rem; }
+.radio-option {
+  flex: 1;
+  text-align: center;
+  padding: 0.85rem 0.5rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.25s var(--ease);
+}
+.radio-option input { display: none; }
+.radio-option.active { background: var(--maroon); border-color: var(--maroon); color: var(--cream); }
+#rsvp-submit { width: 100%; margin-top: var(--space-2); }
+.form-status { margin-top: var(--space-2); font-size: 0.85rem; text-align: center; min-height: 1.2em; }
+.form-status.success { color: #3d6b3d; }
+.form-status.error { color: var(--maroon); }
+
+/* ---------- wishes ---------- */
+#wishes-list { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-3); max-height: 480px; overflow-y: auto; }
+.wish-item { padding: var(--space-2) 0; border-top: 1px solid var(--gold-line); }
+.wish-item:last-child { border-bottom: 1px solid var(--gold-line); }
+.wish-name { font-family: var(--font-display); font-size: 1.1rem; color: var(--maroon-deep); }
+.wish-tag { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-left: 0.5rem; }
+.wish-msg { margin-top: 0.35rem; font-size: 0.92rem; line-height: 1.6; opacity: 0.85; }
+.wish-empty { text-align: center; opacity: 0.6; font-size: 0.88rem; padding: var(--space-3) 0; }
+
+/* ---------- gift ---------- */
+#gift { text-align: center; }
+.gift-card {
+  margin-top: var(--space-3);
+  border: 1px solid var(--gold-line);
+  padding: var(--space-4) var(--space-3);
+  position: relative;
+}
+.gift-row { margin-bottom: var(--space-3); }
+.gift-row:last-child { margin-bottom: 0; }
+.gift-label { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+.gift-value { font-family: var(--font-display); font-size: 1.35rem; color: var(--maroon-deep); }
+.gift-sub { font-size: 0.85rem; opacity: 0.7; margin-top: 0.2rem; }
+.copy-btn { margin-top: 0.7rem; font-size: 0.68rem; }
+
+/* ---------- closing ---------- */
+#closing {
+  text-align: center;
+  background: linear-gradient(180deg, var(--champagne) 0%, var(--ivory) 100%);
+  padding-bottom: var(--space-6);
+}
+.closing-note { font-family: var(--font-hand); font-size: 1.6rem; color: var(--gold); margin-top: var(--space-2); }
+.closing-names { font-family: var(--font-display); font-style: italic; font-size: clamp(2rem, 9vw, 3rem); color: var(--maroon-deep); margin-top: var(--space-2); }
+.closing-credit { margin-top: var(--space-5); font-size: 0.68rem; letter-spacing: 0.1em; opacity: 0.5; }
+
+/* ---------- floating music button ---------- */
+#music-toggle {
+  position: fixed;
+  bottom: var(--space-2);
+  right: var(--space-2);
+  z-index: 400;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--maroon);
+  border: 1px solid var(--gold-soft);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(43,29,20,0.25);
+}
+#music-toggle svg { width: 20px; height: 20px; }
+#music-toggle .disc { animation: spin 6s linear infinite; animation-play-state: paused; }
+#music-toggle.playing .disc { animation-play-state: running; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- responsive: tablet/desktop ---------- */
+@media (min-width: 720px) {
+  :root { --container: 620px; }
+  .person-row { grid-template-columns: 1fr; }
+  .countdown-grid { max-width: 480px; }
+}
